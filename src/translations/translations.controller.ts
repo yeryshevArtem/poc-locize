@@ -15,26 +15,26 @@ export class TranslationsController {
 
   @Get()
   findAll() {
-    return 'Should return all translations';
+    return this.tranlationsService.findAll();
   }
 
-  @Get(':lang')
-  findOne(@Param('lang') lang: string) {
-    return `should return translations for ${lang}.`;
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.tranlationsService.findOne(id);
   }
 
   @Post()
   create(@Body() body: any) {
-    return body;
+    return this.tranlationsService.create(body);
   }
 
   @Patch(':lang')
   update(@Param('lang') lang: string, @Body() body: any) {
-    return `should update translations for ${lang}.`;
+    return this.tranlationsService.update(lang, body);
   }
 
   @Delete(':lang')
-  delete(@Param('lang') lang: string) {
-    return `should remove all translations for ${lang}`;
+  remove(@Param('lang') lang: string) {
+    return this.tranlationsService.remove(lang);
   }
 }
