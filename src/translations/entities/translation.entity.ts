@@ -1,11 +1,9 @@
-interface Resource {
-  key: string;
-  value: string;
-}
+import { Language } from '../types/language';
 
 export class Translation {
   id: number;
-  language: string;
+  language: Language;
   namespace: string;
-  resources: Resource[];
+  key: string;
+  value: string;
 }

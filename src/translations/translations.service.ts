@@ -6,14 +6,10 @@ export class TranslationsService {
   private translations: Translation[] = [
     {
       id: 1,
-      language: 'en',
+      language: 'en_GB',
       namespace: 'footer',
-      resources: [
-        {
-          key: 'company',
-          value: 'Copmany',
-        },
-      ],
+      key: 'title',
+      value: 'Title',
     },
   ];
 

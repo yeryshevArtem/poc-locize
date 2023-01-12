@@ -30,13 +30,13 @@ export class TranslationsController {
     return this.tranlationsService.create(body);
   }
 
-  @Patch(':lang')
-  update(@Param('lang') lang: string, @Body() body: any) {
-    return this.tranlationsService.update(lang, body);
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body: any) {
+    return this.tranlationsService.update(id, body);
   }
 
-  @Delete(':lang')
-  remove(@Param('lang') lang: string) {
-    return this.tranlationsService.remove(lang);
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.tranlationsService.remove(id);
   }
 }
