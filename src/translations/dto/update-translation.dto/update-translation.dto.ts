@@ -1,8 +1,4 @@
-import { Language } from 'src/translations/types/language';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateTranslationDto } from '../create-translation.dto/create-translation.dto';
 
-export class UpdateTranslationDto {
-  readonly language?: Language;
-  readonly namespace?: string;
-  readonly key?: string;
-  readonly value?: string;
-}
+export class UpdateTranslationDto extends PartialType(CreateTranslationDto) {}
