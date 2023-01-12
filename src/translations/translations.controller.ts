@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { TranslationsService } from './translations.service';
 
@@ -14,7 +15,8 @@ export class TranslationsController {
   constructor(private readonly tranlationsService: TranslationsService) {}
 
   @Get()
-  findAll() {
+  findAll(@Query() queryParams) {
+    const { lang, namespace } = queryParams;
     return this.tranlationsService.findAll();
   }
 
