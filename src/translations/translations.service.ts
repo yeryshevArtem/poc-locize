@@ -1,49 +1,51 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose/dist';
+import { Model } from 'mongoose';
+import { CreateTranslationDto } from './dto/create-translation.dto/create-translation.dto';
+import { UpdateTranslationDto } from './dto/update-translation.dto/update-translation.dto';
 import { Translation } from './entities/translation.entity';
 
 @Injectable()
 export class TranslationsService {
-  private translations: Translation[] = [
-    {
-      id: 1,
-      language: 'en_GB',
-      namespace: 'footer',
-      key: 'title',
-      value: 'Title',
-    },
-  ];
+  constructor(
+    @InjectModel(Translation.name)
+    private readonly translationModel: Model<Translation>,
+  ) {}
 
   findAll() {
-    return this.translations;
+    return this.translationModel.find().exec();
   }
 
-  findOne(id: string) {
-    const translation = this.translations.find(
-      (translation) => translation.id === +id,
-    );
+  async findOne(id: string) {
+    const translation = await this.translationModel.findOne({ _id: id }).exec();
     if (!translation) {
       throw new NotFoundException(`Translation #${id} not found`);
     }
     return translation;
   }
 
-  create(createTranslationDto: any) {
-    this.translations.push(createTranslationDto);
+  create(createTranslationDto: CreateTranslationDto) {
+    const translation = new this.translationModel(createTranslationDto);
+    return translation.save();
   }
 
-  update(id: string, updateTranslationDto: any) {
-    const existingTranslation = this.findOne(id);
-    if (existingTranslation) {
-      // TODO: refactor it
+  async update(id: string, updateTranslationDto: UpdateTranslationDto) {
+    const existingTranslation = await this.translationModel
+      .findOneAndUpdate(
+        { _id: id },
+        { $set: updateTranslationDto },
+        { new: true },
+      )
+      .exec();
+
+    if (!existingTranslation) {
+      throw new NotFoundException(`Translation #${id} not found`);
     }
+    return existingTranslation;
   }
 
-  remove(id: string) {
-    const translationIndex = this.translations.findIndex(
-      (item) => item.id === +id,
-    );
-    if (translationIndex >= 0) {
-      this.translations.splice(translationIndex, 1);
-    }
+  async remove(id: string) {
+    const translation = await this.findOne(id);
+    return translation.remove();
   }
 }

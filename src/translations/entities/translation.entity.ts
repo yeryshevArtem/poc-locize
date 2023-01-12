@@ -1,9 +1,20 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 import { Language } from '../types/language';
 
-export class Translation {
-  id: number;
-  language: Language;
-  namespace: string;
+@Schema()
+export class Translation extends Document {
+  @Prop()
   key: string;
+
+  @Prop()
+  language: Language;
+
+  @Prop()
+  namespace: string;
+
+  @Prop()
   value: string;
 }
+
+export const TranslationSchema = SchemaFactory.createForClass(Translation);

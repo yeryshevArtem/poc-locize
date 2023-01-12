@@ -9,7 +9,7 @@ export class CreateTranslationDto {
   readonly namespace: string;
 
   @IsString()
-  readonly key: string;
+  key: string;
 
   @IsString()
   readonly value: string;
