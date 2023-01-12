@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose/dist';
 import { Model } from 'mongoose';
+import { FilterQueryDto } from 'src/common/dto/filter-query.dto/filter-query.dto';
 import { CreateTranslationDto } from './dto/create-translation.dto/create-translation.dto';
 import { UpdateTranslationDto } from './dto/update-translation.dto/update-translation.dto';
 import { Translation } from './entities/translation.entity';
@@ -12,8 +13,14 @@ export class TranslationsService {
     private readonly translationModel: Model<Translation>,
   ) {}
 
-  findAll() {
-    return this.translationModel.find().exec();
+  findAll(filterQueryDto: FilterQueryDto) {
+    const { lang, namespace } = filterQueryDto;
+    return this.translationModel
+      .find({
+        ...(lang && { language: lang }),
+        ...(namespace && { namespace }),
+      })
+      .exec();
   }
 
   async findOne(id: string) {

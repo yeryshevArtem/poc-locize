@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { FilterQueryDto } from 'src/common/dto/filter-query.dto/filter-query.dto';
 import { CreateTranslationDto } from './dto/create-translation.dto/create-translation.dto';
 import { UpdateTranslationDto } from './dto/update-translation.dto/update-translation.dto';
 import { TranslationsService } from './translations.service';
@@ -17,9 +18,8 @@ export class TranslationsController {
   constructor(private readonly tranlationsService: TranslationsService) {}
 
   @Get()
-  findAll(@Query() queryParams) {
-    const { lang, namespace } = queryParams;
-    return this.tranlationsService.findAll();
+  findAll(@Query() filterQueryDto: FilterQueryDto) {
+    return this.tranlationsService.findAll(filterQueryDto);
   }
 
   @Get(':id')
