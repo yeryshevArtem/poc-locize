@@ -2,6 +2,7 @@ import { Language } from 'src/translations/types/language';
 import { IsString } from 'class-validator';
 
 export class CreateTranslationDto {
+  @IsString()
   readonly language: Language;
 
   @IsString()
