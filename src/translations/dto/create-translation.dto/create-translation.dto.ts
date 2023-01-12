@@ -1,8 +1,8 @@
 import { Language } from 'src/translations/types/language';
 
 export class CreateTranslationDto {
-  language: Language;
-  namespace: string;
-  key: string;
-  value: string;
+  readonly language: Language;
+  readonly namespace: string;
+  readonly key: string;
+  readonly value: string;
 }

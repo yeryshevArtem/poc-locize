@@ -8,6 +8,8 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { CreateTranslationDto } from './dto/create-translation.dto/create-translation.dto';
+import { UpdateTranslationDto } from './dto/update-translation.dto/update-translation.dto';
 import { TranslationsService } from './translations.service';
 
 @Controller('translations')
@@ -26,13 +28,16 @@ export class TranslationsController {
   }
 
   @Post()
-  create(@Body() body: any) {
-    return this.tranlationsService.create(body);
+  create(@Body() createTranslationDto: CreateTranslationDto) {
+    return this.tranlationsService.create(createTranslationDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    return this.tranlationsService.update(id, body);
+  update(
+    @Param('id') id: string,
+    @Body() updateTranslationDto: UpdateTranslationDto,
+  ) {
+    return this.tranlationsService.update(id, updateTranslationDto);
   }
 
   @Delete(':id')
