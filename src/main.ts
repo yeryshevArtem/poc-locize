@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   const options = new DocumentBuilder()
-    .setTitle('translations')
+    .setTitle('POC Locize')
     .setDescription('The service for translating')
     .setVersion('1.0')
     .build();
