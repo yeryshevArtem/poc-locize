@@ -4,13 +4,13 @@ import { Language } from '../types/language';
 
 @Schema()
 export class Translation extends Document {
-  @Prop()
+  @Prop({ index: true })
   key: string;
 
-  @Prop()
+  @Prop({ index: true })
   language: Language;
 
-  @Prop()
+  @Prop({ index: true })
   namespace: string;
 
   @Prop()
@@ -18,3 +18,8 @@ export class Translation extends Document {
 }
 
 export const TranslationSchema = SchemaFactory.createForClass(Translation);
+TranslationSchema.index({ language: 1, type: -1 });
+TranslationSchema.index({ namespace: 1, type: -1 });
+TranslationSchema.index({ key: 1, type: -1 });
+
+// https://mongoosejs.com/docs/guide.html#validateBeforeSave

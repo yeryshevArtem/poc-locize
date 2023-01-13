@@ -46,6 +46,7 @@ export class TranslationsService {
      * We must throw an error and inform user that it's impossible to create.
      **/
 
+    // https://mongoosejs.com/docs/guide.html#validateBeforeSave
     const existingTranslation = await this.translationModel
       .find({
         language,
