@@ -1,8 +1,7 @@
 import {
   Injectable,
   NotFoundException,
-  HttpException,
-  HttpStatus,
+  ConflictException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose/dist';
 import { Model } from 'mongoose';
@@ -56,10 +55,7 @@ export class TranslationsService {
       .exec();
 
     if (existingTranslation.length) {
-      throw new HttpException(
-        'This translation was created already',
-        HttpStatus.CONFLICT,
-      );
+      throw new ConflictException('This translation was created already');
     }
     const translation = new this.translationModel(createTranslationDto);
     return translation.save();
