@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Language } from '../types/language';
 
 @Schema()
 export class Translation extends Document {
@@ -8,7 +7,7 @@ export class Translation extends Document {
   key: string;
 
   @Prop({ index: true })
-  language: Language;
+  language: string;
 
   @Prop({ index: true })
   namespace: string;

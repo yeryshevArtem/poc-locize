@@ -1,4 +1,3 @@
-import { Language } from 'src/translations/types/language';
 import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger/dist';
 
@@ -9,7 +8,7 @@ export class CreateTranslationDto {
     example: 'en',
   })
   @IsString()
-  readonly language: Language;
+  readonly language: string;
 
   @ApiProperty({
     description: 'Namespace in which user defines the translation',
