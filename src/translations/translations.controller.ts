@@ -40,6 +40,7 @@ export class TranslationsController {
     return this.tranlationsService.create(createTranslationDto);
   }
 
+  // should be modified in order to update a couple of translations via one request
   @Patch(':id')
   update(
     @Param('id') id: string,
