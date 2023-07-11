@@ -1,4 +1,4 @@
-# This is a service that is responsible for localizing.
+# PoC Locize
 
 ## Description
 
